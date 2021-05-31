@@ -1,0 +1,61 @@
+from tkinter import *
+from tkinter import ttk
+
+root = Tk()
+root.title('Fake Account Detection ')
+root.geometry('850x650')
+root.configure(background="purple2")
+var = StringVar()
+label = Label( root, textvariable = var,font=('arial',20,'bold'),bd=20,background="purple2")
+var.set('Fake Account Detection ')
+label.grid(row=0,columnspan=6)
+
+label_1 = ttk.Label(root, text ='statuses_count',font=("Helvetica", 16),background="Purple3")
+label_1.grid(row=11,column=0)
+    
+Entry_1= Entry(root)
+Entry_1.grid(row=11,column=1)
+
+label_2 = ttk.Label(root, text ='following_count',font=("Helvetica", 16),background="Purple3")
+label_2.grid(row=12,column=0)
+    
+Entry_2 = Entry(root)
+Entry_2.grid(row=12,column=1)
+    
+    
+label_3 = ttk.Label(root, text ='favourites_count',font=("Helvetica", 16),background="Purple3")
+label_3.grid(row=13,column=0)
+    
+Entry_3 = Entry(root)
+Entry_3.grid(row=13,column=1)
+
+
+label_4 = ttk.Label(root, text ='listed_count',font=("Helvetica", 16),background="Purple3")
+label_4.grid(row=14,column=0)
+    
+Entry_4 = Entry(root)
+Entry_4.grid(row=14,column=1)
+
+
+def predict():
+    statuses_count = Entry_1.get()
+    following_count = Entry_2.get()
+    favourites_count = Entry_3.get()
+    listed_count = Entry_4.get()
+    out = nb.predict([[float(statuses_count),float(following_count),float(favourites_count),float(listed_count)]])
+    if out[0] == 'INT':
+        output.delete(0,END)
+        output.insert(0,'FAKE')
+    else:
+        output.delete(0,END)
+        output.insert(0,'REAL')
+        
+
+b1 = Button(root, text = 'predict',font=("Helvetica", 16),background="Purple3",command = predict)
+b1.grid(row=15,column=0)
+    
+
+output = Entry(root)
+output.grid(row=15,column=1)
+    
+root.mainloop()
