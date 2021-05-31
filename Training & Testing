@@ -1,0 +1,16 @@
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
+
+nb = GaussianNB()
+
+nb.fit(X_train,Y_train)
+
+Y_pred_nb = nb.predict(X_test)
+prediction = nb.predict(X_test)
+
+print(nb.predict([[5,9,1,0]]))
+if nb.predict([[5,9,1,0]]) == 'INT':
+    
+    print("FAKE")
+else:
+    print("REAL")
